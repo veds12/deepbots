@@ -15,21 +15,20 @@ jobs:
       - name: Generate changelog
         uses: charmixer/auto-changelog-action@v1.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AIDUDEZZ_BOT_TOKEN }}
 
       - name: Commit files
         env: 
-          CI_USER: ${{ secrets.YOUR_GITHUB_USER }}
-          CI_EMAIL: ${{ secrets.YOUR_GITHUB_EMAIL }}
-          ACTIONS_ALLOW_UNSECURW_COMMANDS: true
+          CI_USER: ${{ secrets.AIDUDEZZZ_BOT_USER }}
+          CI_EMAIL: ${{ secrets.AIDUDEZZZ_BOT_EMAIL }}
         run: |
-          git config --local user.email "<USER_EMAIL>"
-          git config --local user.name "<USER_USERNAME>"
+          git config --local user.email ${{ secrets.AIDUDEZZZ_BOT_EMAIL }}
+          git config --local user.name ${{ secrets.AIDUDEZZZ_BOT_USER }}
           git add docs/CHANGELOG.md && git commit -m 'Updated CHANGELOG.md' && echo ::set-env name=push::1 || echo "No changes to CHANGELOG.md"
       - name: Push changes
         if: env.push == 1
         env: 
-          CI_USER: ${{ secrets.YOUR_GITHUB_USER }}
-          CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_USER: ${{ secrets.AIDUDEZZZ_BOT_USER }}
+          CI_TOKEN: ${{ secrets.AIDUDEZZZ_BOT_TOKEN }}
         run: |
           git push "https://$CI_USER:$CI_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:master 
