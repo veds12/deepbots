@@ -1,20 +1,15 @@
 name: Generate Changelog
 on:
-  pull_request:
-    types: [closed]
-
-  release:
-    types: [published]
-
-  issues:
-    types: [closed, edited]
+  push:
+    branches:
+      - dev
 
 jobs:
   generate_changelog:
     name: Update Changelog
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout master
+      - name: Checkout dev
         uses: actions/checkout@v2
 
       - name: Generate changelog
